@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" type="text/css">
+    <script src="/layui/layui.all.js"></script>
+</head>
+<body>
+<div class="layui-form-item">
+    <a href="/toadd">添加</a>
+</div>
+<table id="demo" lay-filter="test"></table>
+<!--通过id  把删除等 放入操作的下方-->
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" href="/todel?dept=">删除</a>
+</script>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            ,height: 312
+            ,url: '/findperson' //数据接口
+            ,page: true //开启分页
+            ,cols: [
+                [ //表头
+                {field: 'dept', title: 'ID', width:80, sort: true, fixed: 'left'}
+                ,{field: 'name', title: '用户名', width:80}
+                ,{field: 'age', title: '年龄', width:80, sort: true}
+                ,{field: 'sex', title: '性别', width:80}
+                //操作  的删除
+                ,{fixed: 'right', width: 165, align:'center', toolbar: '#barDemo', title: '操作'}
+            ]
+            ]
+        });
+    });
+
+
+</script>
+
+
+</body>
+</html>

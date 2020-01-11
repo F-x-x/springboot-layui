@@ -1,0 +1,40 @@
+springboot-layui
+先用thymeleaf显示页面
+然后：
+    1.修改controller
+        //layui
+        @RequestMapping("/all")
+        public String toLayUiPage() {
+            return "sel";
+        }
+
+        @RequestMapping("/findperson")
+        @ResponseBody  //layui 的模板解析器（没有会报错）
+        public LayUiTableData findPerson(){
+            LayUiTableData layUiTableData = new LayUiTableData();
+            List<Person> allPerson = personDao.findAllPerson();
+            layUiTableData.setCode(0);
+            layUiTableData.setData(allPerson);
+            return layUiTableData;
+        }
+    2.导入entity：LayuiTableData
+    3.layui的jar包
+    4.前端（通过ip地址（controller中的路径）先到页面然后通过url  查询数据 显示在页面上）
+     结束： 查询结束
+
+添加
+    查询页面 添加个按钮 --> controller --> add 页面  -->controller --> dao -->mapper.xml
+
+
+    <!--通过form表单 传递添加数据-->
+    <form action="/insertuser" method="post">
+    <!--  id <input type="hidden" name="dept" ><br/>-->
+           编号： <input type="text" name="dept" ><br/><br>
+           用户：<input type="text" name="name"><br><br>
+           年龄：<input type="text" name="age"><br><br>
+           性别：<input type="text" name="sex"><br><br>
+           <input type="submit" name="提交">
+    </form>
+
+删除
+    怎么将删除按钮放入到操作栏下面
